@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>어서와 우리동네는 처음이지?</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .mytitle {
+            width: 100%;
+            height: 250px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+            background-position: center;
+            background-size: cover;
+
+            color: black;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mytitle > button {
+            width: 200px;
+            height: 50px;
+
+            background-color: transparent;
+            color: black;
+
+            border-radius: 50px;
+            border: 2px solid white;
+
+            margin-top: 10px;
+        }
+
+        .mytitle > button:hover {
+            border: 2px solid white;
+        }
+
+        .mypost {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 0px auto;
+            padding: 30px 30px 30px 30px;
+            box-shadow: 0px 0px 3px 0px gray;
+            display: none;
+        }
+
+        .mybtns {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .mybtns > button {
+            margin-right: 10px;
+        }
+
+
+    </style>
+    <script>
+        $(document).ready(function(){
+          listing();
+        });
+
+        function listing() {
+            $('#cards-box').empty()
+            $.ajax({
+                type: 'GET',
+                url: '/foods',
+                data: {},
+                success: function (response) {
+                    let rows = response['movies']
+                    for(let i = 0; i < rows.length; i++) {
+                        let username = rows[i]['username']
+                        let url = rows[i]['url']
+                        let star = rows[i]['star']
+                        let comment = rows[i]['comment']
+                        let image = rows[i]['image']
+
+                        let star_image = '⭐'.repeat(star)
+
+                        let temp_html = `<div class="col">
+                                            <div class="card h-100">
+                                                <img src="${image}"
+                                                     class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+                                                    <p class="card-text">${desc}</p>
+                                                    <p>${star_image}</p>
+                                                    <p class="mycomment">${comment}</p>
+                                                </div>
+                                            </div>
+                                        </div>`
+
+                        $('#cards-box').append(temp_html)
+                    }
+                }
+            })
+        }
+
+        function posting() {
+            let username = $('#username').val()
+            let url = $('#url').val()
+            let star = $('#star').val()
+            let comment = $('#comment').val()
+            let image = $('#image').val()
+
+            $.ajax({
+                type: 'POST',
+                url: '/foods',
+                data: {username_give: username, url_give: url, star_give: star, comment_give: comment, image_give: image},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+
+        function open_box(){
+            $('#post-box').show()
+        }
+        function close_box(){
+            $('#post-box').hide()
+        }
+    </script>
+</head>
+
+<body>
+<div class="mytitle">
+    <h1>어서와 우리 동네는 처음이지?</h1>
+    <button onclick="open_box()">내 맛집 기록하기</button>
+</div>
+
+<div class="mypost" id="post-box">
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">추천인</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" placeholder="이름을 입력하세요">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">URL</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" placeholder="맛집의 네이버 지도 url을 입력해주세요">
+
+    <div class="input-group mb-3"style="padding: 15px 0px 0px 0px"  >
+        <label class="input-group-text" for="inputGroupSelect01">별점</label>
+        <select class="form-select" id="star">
+            <option selected>-- 선택하기 --</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">코멘트</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" placeholder="맛, 분위기, 서비스 품질등을 알려주세요">
+
+    </div>
+
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="inputGroupFile02" placeholder="맛집 이미지를 등록해주세요">
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+        </div>
+
+        <div class="mybtns">
+            <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+            <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+</div>
+
+</body>
+
+</html>
