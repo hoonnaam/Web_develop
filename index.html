@@ -95,6 +95,46 @@
 
 </head>
 <script>
+    $(document).ready(function () {
+        listing();
+    });
+
+    function listing() {
+        // $('#cards-box').empty()
+        $.ajax({
+            type: 'GET',
+            url: '/foods',
+            data: {},
+            success: function (response) {
+                let rows = response['foods']
+                for (let i = 0; i < rows.length; i++) {
+                    let username = rows[i]['username']
+                    let url = rows[i]['url']
+                    let star = rows[i]['star']
+                    let comment = rows[i]['comment']
+                    let image = rows[i]['image']
+
+                    let star_image = '⭐'.repeat(star)
+
+                    let temp_html = `<div class="col">
+                                       <div class="row row-cols-3 row-cols-md-3 g-3">
+                                            <div class="card w-100">
+                                                <img src="${image}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${username}</h5>
+                                                    <p class="card-text">${url}</p>
+                                                    <p>${star_image}</p>
+                                                    <p class="card-text"><small class="text-muted">${comment}</small></p>
+                                                </div>
+                                            </div>
+                                        </div>`
+
+                    $('#foods_list').append(temp_html)
+                }
+            }
+        })
+    }
+
     function posting() {
         let username = $('#username').val()
         let url = $('#url').val()
@@ -112,50 +152,6 @@
             }
         });
     }
-
-
-
-    $(document).ready(function () {
-        listing();
-    });
-
-    function listing() {
-        $('#cards-box').empty()
-        $.ajax({
-            type: 'GET',
-            url: '/foods',
-            data: {},
-            success: function (response) {
-                let rows = response['movies']
-                for (let i = 0; i < rows.length; i++) {
-                    let username = rows[i]['username']
-                    let url = rows[i]['url']
-                    let star = rows[i]['star']
-                    let comment = rows[i]['comment']
-                    let image = rows[i]['image']
-
-                    let star_image = '⭐'.repeat(star)
-
-                    let temp_html = `<div class="col">
-                                            <div class="card h-100">
-                                                <img src="${image}"
-                                                     class="card-img-top">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">${title}</h5>
-                                                    <p class="card-text">${desc}</p>
-                                                    <p>${star_image}</p>
-                                                    <p class="mycomment">${comment}</p>
-                                                </div>
-                                            </div>
-                                        </div>`
-
-                    $('#cards-box').append(temp_html)
-                }
-            }
-        })
-    }
-
-
     function open_box() {
         $('#post-box').show()
     }
@@ -211,15 +207,14 @@
     </div>
 
     <div class="mybtns">
-        <button onclick="posting() ()" type="button" class="btn btn-dark">기록하기</button>
+        <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
         <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
     </div>
 
     <!--#cards-box-->
 </div>
 <div class="mycards">
-    <div class="row row-cols-1 row-cols-md-3 g-3">
-
+    <div class="row row-cols-3 row-cols-md-3 g-3" id="foods_list">
         <div class="col">
             <div class="card">
                 <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"

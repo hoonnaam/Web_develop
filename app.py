@@ -9,11 +9,10 @@ db = client.dbsparta
 def home():
    return render_template('index.html')
 
-# @app.route('/foods', methods=['GET'])
-# def foods_get():
-# title_receive = request.args.get('title_give')
-# print(title_receive)
-# return jsonify({'result':'success', 'msg': '기록되었습니다!'})
+@app.route('/foods', methods=['GET'])
+def foods_get():
+    foods_list = list(db.foods.find({}, {'_id': False}))
+    return jsonify({'foods':foods_list})
 
 @app.route('/foods', methods=['POST'])
 def foods_post():
