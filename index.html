@@ -1,0 +1,401 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <title>어서와!우리 동네는 처음이지?</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Nanum Myeongjo', serif;
+        }
+
+
+        .mytitle {
+            width: 100%;
+            height: 200px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('#헤드라인 배경사진 맛집사진으로 교체');
+            background-position: center;
+            background-size: cover;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mytitle > button {
+            width: 150px;
+            height: 30px;
+
+            background-color: transparent;
+            color: white;
+
+            border-radius: 50px;
+            border: 1px solid white;
+
+            margin-top: 10px;
+        }
+
+        .mytitle > button:hover {
+            border: 2px solid white;
+        }
+
+        .mypost {
+            width: 95%;
+            max-width: 800px;
+            margin: 20px auto 0px auto;
+            padding: 30px 30px 30px 30px;
+            box-shadow: 0px 0px 3px 0px gray;
+            display: none;
+        }
+
+        .mycards {
+            margin: 20px auto 0px auto;
+            width: 95%;
+            max-width: 1500px;
+        }
+
+        .mybtns {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .mybtns > button {
+            margin-right: 10px;
+        }
+
+        /*.mypost2 {*/
+        /*    width: 95%;*/
+        /*    max-width: 1400px;*/
+        /*    margin: 20px auto 0px auto;*/
+        /*    padding: 20px;*/
+        /*    box-shadow: 0px 0px 3px 0px gray;*/
+        /*}*/
+
+    </style>
+
+</head>
+<script>
+    function posting() {
+        let username = $('#username').val()
+        let url = $('#url').val()
+        let star = $('#star').val()
+        let comment = $('#comment').val()
+        let image = $('#image').val()
+
+        $.ajax({
+            type: 'POST',
+            url: '/foods',
+            data: { username_give: username, url_give: url, star_give: star, comment_give: comment, image_give: image},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload()
+            }
+        });
+    }
+
+
+
+    $(document).ready(function () {
+        listing();
+    });
+
+    function listing() {
+        $('#cards-box').empty()
+        $.ajax({
+            type: 'GET',
+            url: '/foods',
+            data: {},
+            success: function (response) {
+                let rows = response['movies']
+                for (let i = 0; i < rows.length; i++) {
+                    let username = rows[i]['username']
+                    let url = rows[i]['url']
+                    let star = rows[i]['star']
+                    let comment = rows[i]['comment']
+                    let image = rows[i]['image']
+
+                    let star_image = '⭐'.repeat(star)
+
+                    let temp_html = `<div class="col">
+                                            <div class="card h-100">
+                                                <img src="${image}"
+                                                     class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${title}</h5>
+                                                    <p class="card-text">${desc}</p>
+                                                    <p>${star_image}</p>
+                                                    <p class="mycomment">${comment}</p>
+                                                </div>
+                                            </div>
+                                        </div>`
+
+                    $('#cards-box').append(temp_html)
+                }
+            }
+        })
+    }
+
+
+    function open_box() {
+        $('#post-box').show()
+    }
+
+    function close_box() {
+        $('#post-box').hide()
+    }
+</script>
+
+
+<body>
+<div class="mytitle">
+    <h1>어서와 우리 동네는 처음이지?</h1>
+    <button onclick="open_box()">내 맛집 기록하기</button>
+</div>
+
+<div class="mypost" id="post-box">
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" >추천인</span>
+        <input id="username" type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" placeholder="이름을 입력하세요">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" >URL</span>
+        <input id="url" type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" placeholder="맛집의 네이버 지도 url을 입력해주세요">
+    </div>
+
+    <div class="input-group mb-3" style="padding: 15px 0px 0px 0px">
+        <label class="input-group-text" for="star">별점</label>
+        <select class="form-select" id="star">
+            <option selected>-- 선택하기 --</option>
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+        </select>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" >코멘트</span>
+        <input id="comment" type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-default" placeholder="맛, 분위기, 서비스 품질등을 알려주세요">
+
+    </div>
+
+    <div class="input-group mb-3">
+        <input type="file" class="form-control" id="image" placeholder="맛집 이미지를 등록해주세요">
+        <label class="input-group-text" for="image">Upload</label>
+    </div>
+
+    <div class="mybtns">
+        <button onclick="posting() ()" type="button" class="btn btn-dark">기록하기</button>
+        <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+    </div>
+
+    <!--#cards-box-->
+</div>
+<div class="mycards">
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+
+        <div class="col">
+            <div class="card">
+                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                     class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맛집 이름(크롤링)</h5>
+                    <p>⭐⭐⭐(입력값 가져오기)</p>
+                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                     class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맛집 이름(크롤링)</h5>
+                    <p>⭐⭐⭐(입력값 가져오기)</p>
+                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                     class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맛집 이름(크롤링)</h5>
+                    <p>⭐⭐⭐(입력값 가져오기)</p>
+                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                     class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맛집 이름(크롤링)</h5>
+                    <p>⭐⭐⭐(입력값 가져오기)</p>
+                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                     class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맛집 이름(크롤링)</h5>
+                    <p>⭐⭐⭐(입력값 가져오기)</p>
+                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                     class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">맛집 이름(크롤링)</h5>
+                    <p>⭐⭐⭐(입력값 가져오기)</p>
+                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="mypost2" style="max-width: 1500px;">-->
+        <!--  <div class="row g-0">-->
+        <!--    <div class="col-md-8">-->
+        <!--      <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg" class="img-fluid rounded-start" alt="...">-->
+        <!--    </div>-->
+        <!--    <div class="col-md-4">-->
+        <!--      <div class="card-body">-->
+        <!--        <h2 class="card-title">title</h2>-->
+        <!--           <h5 class="card-category">category</h5>-->
+        <!--          <p>⭐⭐⭐(입력값 가져오기)</p>-->
+        <!--           <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>-->
+        <!--          <p class="card-writer">writer</p>-->
+        <!--        <p class="card-comment">여기는 한줄평이 들어갑니다(맛/분위기/가격)</p>-->
+        <!--        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+        <!--      </div>-->
+        <!--    </div>-->
+        <!--  </div>-->
+        <!--     </div>-->
+
+        <!--<div class="mypost2" style="max-width: 1400px;">-->
+        <!--    <div class="row g-0">-->
+        <!--        <div class="col-md-7">-->
+        <!--            <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"-->
+        <!--                 class="img-fluid rounded-start" alt="...">-->
+        <!--        </div>-->
+        <!--        <div class="col-md-5">-->
+        <!--            <div class="card-body">-->
+
+        <!--                <h2 class="card-title">맛집 이름 값</h2>-->
+        <!--                <dl class="row">-->
+        <!--                    <dt class="col-sm-3">카테고리 값</dt>-->
+        <!--                    <dd class="col-sm-9"></dd>-->
+
+        <!--                    <dt class="col-sm-3">별점</dt>-->
+        <!--                    <dd class="col-sm-9">-->
+        <!--                        <p>⭐⭐⭐(입력값)</p>-->
+        <!--                    </dd>-->
+
+        <!--                    <dt class="col-sm-3 blank"></dt>-->
+        <!--                    <dd class="col-sm-9"></dd>-->
+        <!--                    <dt class="col-sm-3 blank"></dt>-->
+        <!--                    <dd class="col-sm-9"></dd>-->
+        <!--                    <dt class="col-sm-3 blank"></dt>-->
+        <!--                    <dd class="col-sm-9"></dd>-->
+
+        <!--                    <dt class="col-sm-3">주소</dt>-->
+        <!--                    <dd class="col-sm-9">주소 값</dd>-->
+
+        <!--                    <dt class="col-sm-3">URL</dt>-->
+        <!--                    <dd class="col-sm-9">url 값 <a href="#" class="link-success">복사</a></dd>-->
+
+
+        <!--                    <dt class="col-sm-3 text-truncate"></dt>-->
+        <!--                    <dd class="col-sm-9"></dd>-->
+
+        <!--                    <dt class="col-sm-3">추천인</dt>-->
+        <!--                    <dd class="col-sm-9">추천인 값</dd>-->
+
+        <!--                    <dt class="col-sm-3 text-truncate"></dt>-->
+        <!--                    <dd class="col-sm-9"></dd>-->
+
+        <!--                    <dt class="col-sm-3">한줄평</dt>-->
+        <!--                    <dd class="col-sm-9">한줄평 가져오기</dd>-->
+
+        <!--                </dl>-->
+        <!--                </dd>-->
+        <!--                </dl>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+
+</body>
+
+</html>
+
+<!--#card source-->
+<!--<div class="col">-->
+<!--    <div class="card">-->
+<!--      <img src="..." class="card-img-top" alt="...">-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">Card title</h5>-->
+<!--        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--#상세페이지 우측 설명란 기본 코드-->
+<!--<dl class="row">-->
+<!--  <dt class="col-sm-3">Description lists</dt>-->
+<!--  <dd class="col-sm-9">A description list is perfect for defining terms.</dd>-->
+
+<!--  <dt class="col-sm-3">Term</dt>-->
+<!--  <dd class="col-sm-9">-->
+<!--    <p>Definition for the term.</p>-->
+<!--    <p>And some more placeholder definition text.</p>-->
+<!--  </dd>-->
+
+<!--  <dt class="col-sm-3">Another term</dt>-->
+<!--  <dd class="col-sm-9">This definition is short, so no extra paragraphs or anything.</dd>-->
+
+<!--  <dt class="col-sm-3 text-truncate">Truncated term is truncated</dt>-->
+<!--  <dd class="col-sm-9">This can be useful when space is tight. Adds an ellipsis at the end.</dd>-->
+
+<!--  <dt class="col-sm-3">Nesting</dt>-->
+<!--  <dd class="col-sm-9">-->
+<!--    <dl class="row">-->
+<!--      <dt class="col-sm-4">Nested definition list</dt>-->
+<!--      <dd class="col-sm-8">I heard you like definition lists. Let me put a definition list inside your definition list.</dd>-->
+<!--    </dl>-->
+<!--  </dd>-->
+<!--</dl>-->
