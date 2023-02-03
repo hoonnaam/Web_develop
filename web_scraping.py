@@ -23,6 +23,6 @@ location = soup.select_one("#app-root > div > div > div > div:nth-child(6) > div
 # 음식점 사진 - 이게 너무 어렵네요 ㅜㅜ
 
 # print(title)
-print(title.get_text())
+print(title.text)
 # print(location)
 print(location.text)
