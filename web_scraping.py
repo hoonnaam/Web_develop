@@ -29,6 +29,11 @@ location = soup.select_one("#app-root > div > div > div > div:nth-child(6) > div
 
 # 음식점 사진 - 이게 너무 어렵네요 ㅜㅜ
 
+doc = {
+    'title':title.text,
+    'place':location.text
+}
+db.webscrap.insert_one(doc)
 # print(title)
 print(title.text)
 # print(location)
