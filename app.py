@@ -9,6 +9,10 @@ db = client.dbsparta
 def home():
    return render_template('landing.html')
 
+@app.route('/mainpage')
+def mainpage():
+   return render_template('index.html')
+
 @app.route('/foods', methods=['GET'])
 def foods_get():
     foods_list = list(db.foods.find({}, {'_id': False}))
