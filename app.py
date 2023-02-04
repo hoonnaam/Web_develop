@@ -11,7 +11,7 @@ def home():
 
 @app.route('/mainpage')
 def mainpage():
-   return render_template('mainpage.html')  #(기존)mainpage.html -> templates 폴더 내 mainpage.html로 파일 이름 변경
+   return render_template('mainpage.html')  #(기존)index.html -> templates 폴더 내 mainpage.html로 파일 이름 변경
 
 @app.route('/foods', methods=['GET'])
 def foods_get():
