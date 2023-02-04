@@ -23,8 +23,9 @@ finally:
 search_box = driver.find_element_by_class_name("input_search")
 search_box.send_keys("스타벅스 르네상스사거리점")
 search_box.send_keys(Keys.ENTER)  # 검색창에 "스타벅스 르네상스사거리점" 입력
-
+print('search title')
 time.sleep(7)  # 화면 표시 기다리기
+
 frame = driver.find_element_by_css_selector("iframe#searchIframe")
 print(frame)
 
@@ -34,6 +35,8 @@ time.sleep(3)
 # 여기까지 iframe 전환
 
 scroll_div = driver.find_element_by_xpath("/html/body/div[3]/div/div[2]/div[1]")
+print(scroll_div)
+
 # 검색 결과로 나타나는 scroll-bar 포함한 div 잡고
 driver.execute_script("arguments[0].scrollBy(0,2000)", scroll_div)
 time.sleep(2)
@@ -50,6 +53,7 @@ time.sleep(2)
 
 # csv 파일 생성
 file = open('store.csv', mode='w', newline='')
+print('csv file made')
 writer = csv.writer(file)
 writer.writerow(["place", "rate", "address", "info", "image"])
 final_result = []
@@ -61,9 +65,11 @@ while i <= 1:  # 몇 페이지까지 크롤링할 것인지 지정
     stores_box = driver.find_element_by_xpath("/html/body/div[3]/div/div[2]/div[1]/ul")
     stores = driver.find_elements_by_css_selector("li._3t81n._1l5Ut")
     # 해당 페이지에서 표시된 모든 가게 정보
+    print('stores_box and stores made')
 
     for store in stores:  # 한 페이지 내에서의 반복문. 순차적으로 가게 정보에 접근
-        name = store.find_element_by_css_selector("span._3Yilt").text  # 가게 이름
+        #name = store.find_element_by_css_selector("span._3Yilt").text  # 가게 이름
+        name = store.find_element_by_css_selector("span.Fc1rA").text
         print(name)
         try:
             rating = re.search('/span>(\d).', store.find_element_by_css_selector("span._3Yzhl._1ahw0").get_attribute(
@@ -119,6 +125,7 @@ while i <= 1:  # 몇 페이지까지 크롤링할 것인지 지정
         driver.switch_to.default_content()
         driver.switch_to.frame(frame)
         time.sleep(8)
+        break # temp
         # 한 페이지 크롤링 끝
 
     # # '2'페이지로 이동하는 버튼 클릭 후 i 1증가
