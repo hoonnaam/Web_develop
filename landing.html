@@ -81,6 +81,10 @@
             alert('제출 완료!');
         }
 
+        document.getElementById("myButton").addEventListener("click", function () {
+            window.location.href = "mainpage.html";
+        });
+
     </script>
 </head>
 
@@ -103,7 +107,7 @@
 
             <div class="mybtns">
                 <button onclick="login_button()" type="button" class="btn btn-dark">제출</button>
-                <button onclick="surfing()" type="button" class="btn btn-outline-light">구경하러 가기</button>
+                <button id="myButton" onclick="surfing()" type="button" class="btn btn-outline-light">구경하러 가기</button>
             </div>
 
         </form>
