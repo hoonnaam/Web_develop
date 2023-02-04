@@ -29,7 +29,19 @@ location = soup.select_one("#app-root > div > div > div > div:nth-child(6) > div
 
 # 음식점 사진 - 이게 너무 어렵네요 ㅜㅜ
 
+place = location.text.split()
+
+result_location = " ".join(place[0:3])
+
+print(result_location)
+
+doc = {
+    'title': title.text,
+    'place': result_location
+}
+db.webscrap.insert_one(doc) # 음식점 이름과 위치 db의 'webscrap' collection에 저장
+
 # print(title)
-print(title.text)
+# print(title.text)
 # print(location)
-print(location.text)
+# print(location.text)
