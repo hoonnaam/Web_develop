@@ -79,10 +79,6 @@
             $('#login-box').show()
         }
 
-        function login_button() {
-            alert('구경하러 가기!');
-        }
-
         document.getElementById("myButton").addEventListener("click", function () {
             window.location.href = "index.html";
         });
@@ -95,13 +91,12 @@
 <div class="mytitle">
     <h1>어서와! 우리 동네는 처음이지?</h1>
     <button onclick="open_box()">맛집 탐방</button>
-
     <div class="login" id="login-box">
         <form>
             <div class="mb-3">
                 <label for="LocationHelp" class="form-label">동네 이름</label>
                 <input type="Location" class="form-control" id="LocationHelp" aria-describedby="LocationHelp">
-                <div id="Locationg" class="form-text">거주하는 지역을 입력해주세요.</div>
+                <div id="Location" class="form-text">거주하는 지역을 입력해주세요.</div>
             </div>
             <div class="mb-3">
                 <label for="nicknamehelp" class="form-label">닉네임</label>
@@ -109,9 +104,7 @@
             </div>
 
             <div class="mybtns">
-                <button onclick="login_button()" type="button" class="btn btn-dark">로그인</button>
-
-<!--                <button id="myButton" onclick="surfing()" type="button" class="btn btn-outline-light">구경하러 가기</button>-->
+                <a class="btn btn-dark" href="mainpage.html" role="button"> 로그인 </a>
             </div>
 
         </form>
