@@ -168,20 +168,13 @@
         $('#post-box').hide()
     }
 
-    // Get the card element
-    const card = $('.card');
+    var myModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
 
-    // Add a click event listener to the card
-    card.click(function () {
-        // Show the modal
-        $('.modal').show();
-    });
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    })
 
-    const modal = document.querySelector('.modal');
-    const btnOpenPopup = document.querySelector('.btn-open-popup');
-
-    btnOpenPopup.addEventListener('click', () => {
-    modal.style.display = 'none';
 
 </script>
 
@@ -238,7 +231,7 @@
 
 </div>
 
-<div class="mycards">
+<div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal">
     <div class="row row-cols-1 row-cols-md-3 g-3">
 
         <div class="col">
@@ -252,17 +245,27 @@
                 </div>
             </div>
 
-            <div id="myModal" class="btn-open-popup">
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ㅇㅇㅇㅇ
 
-                 <h1>hello world</h1>
 
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p>Modal content goes here</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
 
 
         </div>
