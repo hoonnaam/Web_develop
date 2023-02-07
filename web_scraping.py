@@ -12,7 +12,7 @@ db = client.dbsparta
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
 # headers.content.decode('utf-8','replace')
-html = requests.get('https://m.place.naver.com/restaurant/1043397620/home', headers=headers)  # 네이버지도가 잘 안되서 모바일 네이버지도로 변경
+html = requests.get('https://m.place.naver.com/restaurant/13326707/home', headers=headers)  # 네이버지도가 잘 안되서 모바일 네이버지도로 변경
 # print(html.encoding) #인코딩 확인
 
 html.encoding = 'UTF-8'  # 한글깨짐 때문에 인코딩 변경 -> utf-8
