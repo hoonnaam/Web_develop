@@ -135,74 +135,6 @@
         })
     }
 
-    function popuppage() {
-        $.ajax({
-            type: 'GET',
-            url: '/foods', //db 내 collections 이름
-            data: {},
-            success: function (response) {
-                let rows = response['foods']
-                for (let i = 0; i < rows.length; i++) {
-                    let image = rows[i]['image'] //이미지 url!
-                    let title = rows[i]['title']
-                    let star = rows[i]['star']
-                    let place = rows[i]['place']
-                    let url = rows[i]['url']
-                    let username = rows[i]['username']
-                    let comment = rows[i]['comment']
-
-                    let star_image = '⭐'.repeat(star)
-
-                    let temp_html = `<div class="col-md-7">
-                                        <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                                             class="img-fluid rounded-start" alt="..."> //db에 넣은 이미지 url 가져오기..
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="card-body">
-                                            <h2 class="card-title">${title}</h2>
-                                            <dl class="row">
-                                                <dt class="col-sm-3">별점</dt>
-                                                <dd class="col-sm-9">
-                                                    <p>${star_image}</p>
-                                                </dd>
-
-                                                <dt class="col-sm-3 blank"></dt>
-                                                <dd class="col-sm-9"></dd>
-                                                <dt class="col-sm-3 blank"></dt>
-                                                <dd class="col-sm-9"></dd>
-                                                <dt class="col-sm-3 blank"></dt>
-                                                <dd class="col-sm-9"></dd>
-
-                                                <dt class="col-sm-3">주소</dt>
-                                                <dd class="col-sm-9">${place}</dd>
-
-                                                <dt class="col-sm-3">URL</dt>
-                                                <dd class="col-sm-9">${url}<a href="#" class="link-success">복사</a></dd>
-
-                                                <dt class="col-sm-3 text-truncate"></dt>
-                                                <dd class="col-sm-9"></dd>
-
-                                                <dt class="col-sm-3">추천인</dt>
-                                                <dd class="col-sm-9">${username}</dd>
-
-                                                <dt class="col-sm-3 text-truncate"></dt>
-                                                <dd class="col-sm-9"></dd>
-
-                                                <dt class="col-sm-3">한줄평</dt>
-                                                <dd class="col-sm-9">${comment}</dd>
-
-                                            </dl>
-                                            </dd>
-                                            </dl>
-                                        </div>
-                                    </div>`
-
-                    $('#foods_list').append(temp_html)
-                }
-            }
-        })
-    }
-
     function posting() {
         let username = $('#username').val()
         let url = $('#url').val()
@@ -220,7 +152,6 @@
             }
         });
     }
-
     function open_box() {
         $('#post-box').show()
     }
@@ -330,57 +261,6 @@
             </div>
         </div>
 
-
-
-
-        <div class="col">
-            <div class="card">
-                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">맛집 이름(크롤링)</h5>
-                    <p>⭐⭐⭐(입력값 가져오기)</p>
-                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">맛집 이름(크롤링)</h5>
-                    <p>⭐⭐⭐(입력값 가져오기)</p>
-                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">맛집 이름(크롤링)</h5>
-                    <p>⭐⭐⭐(입력값 가져오기)</p>
-                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card">
-                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">맛집 이름(크롤링)</h5>
-                    <p>⭐⭐⭐(입력값 가져오기)</p>
-                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
         <!--<div class="mypost2" style="max-width: 1500px;">-->
         <!--  <div class="row g-0">-->
         <!--    <div class="col-md-8">-->
@@ -453,7 +333,9 @@
         <!--    </div>-->
         <!--</div>-->
 
+</body>
 
+</html>
 
 <!--#card source-->
 <!--<div class="col">-->
