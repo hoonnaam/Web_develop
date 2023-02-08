@@ -171,95 +171,95 @@
 
 
 <body>
-<div class="mytitle">
-    <h1>어서와 우리 동네는 처음이지?</h1>
-    <button onclick="open_box()">내 맛집 기록하기</button>
-</div>
-
-<div class="mypost" id="post-box">
-
-    <div class="input-group mb-3">
-        <span class="input-group-text" >추천인</span>
-        <input id="username" type="text" class="form-control" aria-label="Sizing example input"
-               aria-describedby="inputGroup-sizing-default" placeholder="이름을 입력하세요">
+    <div class="mytitle">
+        <h1>어서와 우리 동네는 처음이지?</h1>
+        <button onclick="open_box()">내 맛집 기록하기</button>
     </div>
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" >URL</span>
-        <input id="url" type="text" class="form-control" aria-label="Sizing example input"
-               aria-describedby="inputGroup-sizing-default" placeholder="맛집의 네이버 지도 url을 입력해주세요">
+    <div class="mypost" id="post-box">
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" >추천인</span>
+            <input id="username" type="text" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-default" placeholder="이름을 입력하세요">
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" >URL</span>
+            <input id="url" type="text" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-default" placeholder="맛집의 네이버 지도 url을 입력해주세요">
+        </div>
+
+        <div class="input-group mb-3" style="padding: 15px 0px 0px 0px">
+            <label class="input-group-text" for="star">별점</label>
+            <select class="form-select" id="star">
+                <option selected>-- 선택하기 --</option>
+                <option value="1">⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text" >코멘트</span>
+            <input id="comment" type="text" class="form-control" aria-label="Sizing example input"
+                   aria-describedby="inputGroup-sizing-default" placeholder="맛, 분위기, 서비스 품질등을 알려주세요">
+
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="image" placeholder="맛집 이미지를 등록해주세요">
+            <label class="input-group-text" for="image">Upload</label>
+        </div>
+
+        <div class="mybtns">
+            <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+            <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+
+        <!--#cards-box-->
     </div>
 
-    <div class="input-group mb-3" style="padding: 15px 0px 0px 0px">
-        <label class="input-group-text" for="star">별점</label>
-        <select class="form-select" id="star">
-            <option selected>-- 선택하기 --</option>
-            <option value="1">⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="5">⭐⭐⭐⭐⭐</option>
-        </select>
-    </div>
-
-    <div class="input-group mb-3">
-        <span class="input-group-text" >코멘트</span>
-        <input id="comment" type="text" class="form-control" aria-label="Sizing example input"
-               aria-describedby="inputGroup-sizing-default" placeholder="맛, 분위기, 서비스 품질등을 알려주세요">
-
-    </div>
-
-    <div class="input-group mb-3">
-        <input type="file" class="form-control" id="image" placeholder="맛집 이미지를 등록해주세요">
-        <label class="input-group-text" for="image">Upload</label>
-    </div>
-
-    <div class="mybtns">
-        <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
-        <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
-    </div>
-
-    <!--#cards-box-->
-</div>
 
 
+    <div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div class="row row-cols-1 row-cols-md-3 g-3">
 
-<div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    <div class="row row-cols-1 row-cols-md-3 g-3">
-
-        <div class="col">
-            <div class="card" id="card">
-                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">맛집 이름(크롤링)</h5>
-                    <p>⭐⭐⭐(입력값 가져오기)</p>
-                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+            <div class="col">
+                <div class="card" id="card">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                         class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">맛집 이름(크롤링)</h5>
+                        <p>⭐⭐⭐(입력값 가져오기)</p>
+                        <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <!--<div class="mypost2" style="max-width: 1500px;">-->
         <!--  <div class="row g-0">-->
@@ -333,6 +333,8 @@
         <!--    </div>-->
         <!--</div>-->
 
+        </div>
+    </div>
 </body>
 
 </html>
