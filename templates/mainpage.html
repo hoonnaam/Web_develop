@@ -113,6 +113,7 @@
                     let star = rows[i]['star']
                     let comment = rows[i]['comment']
                     let image = rows[i]['image']
+                    let location = rows[i]['location']
 
                     let star_image = '⭐'.repeat(star)
 
@@ -121,15 +122,14 @@
                                             <div class="card w-100">
                                                 <img src="${image}" class="card-img-top" alt="...">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">${username}</h5>
-                                                    <p class="card-text">${url}</p>
+                                                    <h5 class="card-title">${location}</h5>
                                                     <p>${star_image}</p>
                                                     <p class="card-text"><small class="text-muted">${comment}</small></p>
                                                 </div>
                                             </div>
                                         </div>`
 
-                    $('#foods_list').append(temp_html)
+                    $('#card-box').append(temp_html)
                 }
             }
         })
@@ -288,14 +288,11 @@
             <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
             <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
         </div>
-
-        <!--#cards-box-->
     </div>
-
-
+        <!--#cards-box-->
 
     <div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <div class="row row-cols-1 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-md-3 g-3" id="card-box">
 
             <div class="col">
                 <div class="card" id="card">
