@@ -16,7 +16,7 @@ db = client.dbsparta
 def home():
    return render_template('landing.html')
 
-@app.route('/mainpage')
+@app.route('/mainpage.html')
 def mainpage():
    return render_template('mainpage.html')  #(기존)index.html -> templates 폴더 내 mainpage.html로 파일 이름 변경
 
