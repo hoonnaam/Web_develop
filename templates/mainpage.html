@@ -153,17 +153,14 @@
 
                     let star_image = '⭐'.repeat(star)
 
-                    let temp_html = `<div class="row row-cols-1 row-cols-md-3 g-3" id="card-box" type="button">
-                                        <div class="col">
-                                            <div class="row row-cols-3 row-cols-md-3 g-3">
-                                                <div class="card" id="card" type="button">
-                                                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                                                         class="card-img-top" alt="...">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">${title}</h5>
-                                                        <p>${star_image}</p>
-                                                        <p class="card-text"><small class="text-muted">${location}</small></p>
-                                                    </div>
+                    let temp_html =  `<div class="col">
+                                       <div class="row row-cols-3 row-cols-md-3 g-3">
+                                            <div class="card w-100">
+                                                <img src="${image}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${location}</h5>
+                                                    <p>${star_image}</p>
+                                                    <p class="card-text"><small class="text-muted">${comment}</small></p>
                                                 </div>
                                             </div>
                                         </div>`
@@ -227,7 +224,7 @@
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </div>`
-                    // $('#exampleModal').append(modal_html)
+                    $('#exampleModal').append(modal_html)
                 }
             }
         })
@@ -393,15 +390,14 @@
 
 <div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal" id="mymodal">
     <div class="row row-cols-1 row-cols-md-3 g-3" id="card-box" type="button">
-        <div class="col">
-            <div class="row row-cols-3 row-cols-md-3 g-3">
-                <div class="card" id="card" type="button">
-                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                         class="card-img-top" alt="...">
+         <div class="col">
+           <div class="row row-cols-3 row-cols-md-3 g-3">
+                <div class="card w-100">
+                    <img src="${image}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">맛집 이름(크롤링)</h5>
-                        <p>⭐⭐⭐(입력값 가져오기)</p>
-                        <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                        <h5 class="card-title">${location}</h5>
+                        <p>${star_image}</p>
+                        <p class="card-text"><small class="text-muted">${comment}</small></p>
                     </div>
                 </div>
             </div>
