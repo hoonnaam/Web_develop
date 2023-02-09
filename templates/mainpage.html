@@ -106,6 +106,7 @@
             url: '/foods',
             data: {},
             success: function (response) {
+                console.log(response['foods'])
                 let rows = response['foods']
                 for (let i = 0; i < rows.length; i++) {
                     let username = rows[i]['username']
@@ -113,6 +114,7 @@
                     let star = rows[i]['star']
                     let comment = rows[i]['comment']
                     let image = rows[i]['image']
+                    let title =rows[i]['title']
 
                     let star_image = '⭐'.repeat(star)
 
@@ -121,15 +123,14 @@
                                             <div class="card w-100">
                                                 <img src="${image}" class="card-img-top" alt="...">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">${username}</h5>
-                                                    <p class="card-text">${url}</p>
+                                                    <h5 class="card-title">${title}</h5>
                                                     <p>${star_image}</p>
                                                     <p class="card-text"><small class="text-muted">${comment}</small></p>
                                                 </div>
                                             </div>
                                         </div>`
 
-                    $('#foods_list').append(temp_html)
+                    $('#card-box').append(temp_html)
                 }
             }
         })
@@ -160,13 +161,13 @@
         $('#post-box').hide()
     }
 
-
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
+    //
+    // var myModal = document.getElementById('myModal')
+    // var myInput = document.getElementById('myInput')
+    //
+    // myModal.addEventListener('shown.bs.modal', function () {
+    //     myInput.focus()
+    // })
 </script>
 
 
@@ -222,10 +223,8 @@
     <!--#cards-box-->
 </div>
 
-
-
 <div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    <div class="row row-cols-1 row-cols-md-3 g-3">
+    <div class="row row-cols-1 row-cols-md-3 g-3" id="card-box">
 
         <div class="col">
             <div class="card" id="card">

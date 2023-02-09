@@ -23,7 +23,8 @@ def mainpage():
 @app.route('/foods', methods=['GET'])
 def foods_get():
     foods_list = list(db.foods.find({}, {'_id': False}))
-    return jsonify({'foods':foods_list})
+    print(foods_list)
+    return jsonify({'foods': foods_list})
 
 
 @app.route('/foods', methods=['POST'])
@@ -44,11 +45,11 @@ def foods_post():
     soup = BeautifulSoup(html.text, 'html.parser')
 
     title = soup.select_one('#_title > span.Fc1rA').text
-    print(title)
+    # print(title)
 
     location = soup.select_one(
         "#app-root > div > div > div > div:nth-child(6) > div > div.place_section.no_margin.vKA6F > div > div > div.O8qbU.tQY7D > div > a > span.LDgIH").text
-    print(location)
+    # print(location)
 
     doc = {
          'username': username_receive,
