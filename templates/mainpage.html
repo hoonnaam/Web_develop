@@ -98,7 +98,7 @@
     $(document).ready(function () {
         listing();
     });
-
+/*
     function listing() {
         // $('#cards-box').empty()
         $.ajax({
@@ -133,9 +133,110 @@
                 }
             }
         })
+    }*/
+ function listing() {
+        // $('#cards-box').empty()
+        $.ajax({
+            type: 'GET',
+            url: '/foods',
+            data: {},
+            success: function (response) {
+                let rows = response['foods']
+                for (let i = 0; i < rows.length; i++) {
+                    let image = rows[i]['image'] //이미지 url!
+                    let title = rows[i]['title']
+                    let star = rows[i]['star']
+                    let location = rows[i]['location']
+                    let url = rows[i]['url']
+                    let username = rows[i]['username']
+                    let comment = rows[i]['comment']
+
+                    let star_image = '⭐'.repeat(star)
+
+                    let temp_html = `<div class="row row-cols-1 row-cols-md-3 g-3" id="card-box" type="button">
+                                        <div class="col">
+                                            <div class="row row-cols-3 row-cols-md-3 g-3">
+                                                <div class="card" id="card" type="button">
+                                                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                                                         class="card-img-top" alt="...">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${title}</h5>
+                                                        <p>${star_image}</p>
+                                                        <p class="card-text"><small class="text-muted">${location}</small></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`
+                    $('#card-box').append(temp_html)
+
+                    let modal_html = `<!-- Modal -->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">맛집 상세보기</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mypost2" style="max-width: 1400px;">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-7">
+                                                            <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                                                                 class="img-fluid rounded-start" alt="...">
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="card-body">
+
+                                                                <h2 class="card-title">${title}</h2>
+                                                                <dl class="row">
+
+                                                                    <dt class="col-sm-3">별점</dt>
+                                                                    <dd class="col-sm-9">
+                                                                        <p>${star_image}</p>
+                                                                    </dd>
+
+                                                                    <dt class="col-sm-3 blank"></dt>
+                                                                    <dd class="col-sm-9"></dd>
+                                                                    <dt class="col-sm-3 blank"></dt>
+                                                                    <dd class="col-sm-9"></dd>
+                                                                    <dt class="col-sm-3 blank"></dt>
+                                                                    <dd class="col-sm-9"></dd>
+
+                                                                    <dt class="col-sm-3">주소</dt>
+                                                                    <dd class="col-sm-9">${location}</dd>
+
+                                                                    <dt class="col-sm-3">URL</dt>
+                                                                    <dd class="col-sm-9">${url}</dd>
+
+
+                                                                    <dt class="col-sm-3 text-truncate"></dt>
+                                                                    <dd class="col-sm-9"></dd>
+
+                                                                    <dt class="col-sm-3">추천인</dt>
+                                                                    <dd class="col-sm-9">${username}</dd>
+
+                                                                    <dt class="col-sm-3 text-truncate"></dt>
+                                                                    <dd class="col-sm-9"></dd>
+
+                                                                    <dt class="col-sm-3">한줄평</dt>
+                                                                    <dd class="col-sm-9">${comment}</dd>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>`
+                    // $('#exampleModal').append(modal_html)
+                }
+            }
+        })
     }
 
-    function popuppage() {
+
+
+
+  /*  function modal_page() {
         $.ajax({
             type: 'GET',
             url: '/foods', //db 내 collections 이름
@@ -197,12 +298,11 @@
                                         </div>
                                     </div>`
 
-                    $('#foods_list').append(temp_html)
+                    $('#exampleModal').append(temp_html)
                 }
             }
         })
-    }
-
+    }*/
 
     function posting() {
         let username = $('#username').val()
@@ -291,27 +391,27 @@
 </div>
 <!--#cards-box-->
 
-<div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal" id="mymodal">
     <div class="row row-cols-1 row-cols-md-3 g-3" id="card-box" type="button">
-
         <div class="col">
-            <div class="card" id="card" type="button"> #button처럼 보여주기
-                <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
-                     class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">맛집 이름(크롤링)</h5>
-                    <p>⭐⭐⭐(입력값 가져오기)</p>
-                    <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+            <div class="row row-cols-3 row-cols-md-3 g-3">
+                <div class="card" id="card" type="button">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221125_82%2F166936622428523Mf7_JPEG%2FKakaoTalk_20211026_142515858_01.jpg"
+                         class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">맛집 이름(크롤링)</h5>
+                        <p>⭐⭐⭐(입력값 가져오기)</p>
+                        <p class="card-text"><small class="text-muted">맛집 주소(크롤링)</small></p>
+                    </div>
                 </div>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true" >
-                <div class="modal-dialog modal-xl">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                <div class="modal-dialog modal-xl", id="modal_data">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">맛집상세보기</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">맛집 상세보기</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -324,12 +424,12 @@
                                     <div class="col-md-5">
                                         <div class="card-body">
 
-                                            <h2 class="card-title">맛집 이름 값</h2>
+                                            <h2 class="card-title">${title}</h2>
                                             <dl class="row">
 
                                                 <dt class="col-sm-3">별점</dt>
                                                 <dd class="col-sm-9">
-                                                    <p>⭐⭐⭐(입력값)</p>
+                                                    <p>${star_image}</p>
                                                 </dd>
 
                                                 <dt class="col-sm-3 blank"></dt>
@@ -340,32 +440,28 @@
                                                 <dd class="col-sm-9"></dd>
 
                                                 <dt class="col-sm-3">주소</dt>
-                                                <dd class="col-sm-9">주소 값</dd>
+                                                <dd class="col-sm-9">${location}</dd>
 
                                                 <dt class="col-sm-3">URL</dt>
-                                                <dd class="col-sm-9">url 값</dd>
+                                                <dd class="col-sm-9">${url}</dd>
 
 
                                                 <dt class="col-sm-3 text-truncate"></dt>
                                                 <dd class="col-sm-9"></dd>
 
                                                 <dt class="col-sm-3">추천인</dt>
-                                                <dd class="col-sm-9">추천인 값</dd>
+                                                <dd class="col-sm-9">${username}</dd>
 
                                                 <dt class="col-sm-3 text-truncate"></dt>
                                                 <dd class="col-sm-9"></dd>
 
                                                 <dt class="col-sm-3">한줄평</dt>
-                                                <dd class="col-sm-9">한줄평 가져오기</dd>
-
-                                            </dl>
-                                            </dd>
+                                                <dd class="col-sm-9">${comment}</dd>
                                             </dl>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -377,6 +473,5 @@
     </div>
 </div>
 </body>
-
 </html>
 
