@@ -107,13 +107,15 @@
             url: '/foods',
             data: {},
             success: function (response) {
-                let rows = response['movies']
+                let rows = response['foods']
+                // console.log(response['foods'])
                 for (let i = 0; i < rows.length; i++) {
                     let username = rows[i]['username']
                     let url = rows[i]['url']
                     let star = rows[i]['star']
                     let comment = rows[i]['comment']
                     let image = rows[i]['image']
+                    let title = rows[i]['title']
 
                     let star_image = '⭐'.repeat(star)
 
@@ -123,7 +125,6 @@
                                                      class="card-img-top">
                                                 <div class="card-body">
                                                     <h5 class="card-title">${title}</h5>
-                                                    <p class="card-text">${desc}</p>
                                                     <p>${star_image}</p>
                                                     <p class="mycomment">${comment}</p>
                                                 </div>
@@ -161,13 +162,6 @@
     function close_box() {
         $('#post-box').hide()
     }
-
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
 
 
 </script>

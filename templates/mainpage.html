@@ -113,7 +113,7 @@
                     let star = rows[i]['star']
                     let comment = rows[i]['comment']
                     let image = rows[i]['image']
-                    let location = rows[i]['location']
+                    let title = rows[i]['title']
 
                     let star_image = '⭐'.repeat(star)
 
@@ -122,7 +122,7 @@
                                             <div class="card w-100">
                                                 <img src="${image}" class="card-img-top" alt="...">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">${location}</h5>
+                                                    <h5 class="card-title">${title}</h5>
                                                     <p>${star_image}</p>
                                                     <p class="card-text"><small class="text-muted">${comment}</small></p>
                                                 </div>
