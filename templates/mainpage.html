@@ -91,7 +91,7 @@
         listing();
     });
 /*
-    function listing() {
+    function listing() { //original listing function()
         // $('#cards-box').empty()
         $.ajax({
             type: 'GET',
@@ -222,41 +222,41 @@
                 }
             }
         })
-    }
+}
 
-    function posting() {
-        let username = $('#username').val()
-        let url = $('#url').val()
-        let star = $('#star').val()
-        let comment = $('#comment').val()
-        let image = $('#image').val()
+function posting() {
+    let username = $('#username').val()
+    let url = $('#url').val()
+    let star = $('#star').val()
+    let comment = $('#comment').val()
+    let image = $('#image').val()
 
-        $.ajax({
-            type: 'POST',
-            url: '/foods',
-            data: {username_give: username, url_give: url, star_give: star, comment_give: comment, image_give: image},
-            success: function (response) {
-                alert(response['msg'])
-                window.location.reload()
-            }
-        });
-    }
+    $.ajax({
+        type: 'POST',
+        url: '/foods',
+        data: {username_give: username, url_give: url, star_give: star, comment_give: comment, image_give: image},
+        success: function (response) {
+            alert(response['msg'])
+            window.location.reload()
+        }
+    });
+}
 
-    function open_box() {
-        $('#post-box').show()
-    }
+function open_box() {
+    $('#post-box').show()
+}
 
-    function close_box() {
-        $('#post-box').hide()
-    }
+function close_box() {
+    $('#post-box').hide()
+}
 
 
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
 
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
+myModal.addEventListener('shown.bs.modal', function () {
+    myInput.focus()
+})
 </script>
 
 
