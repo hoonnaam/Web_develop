@@ -148,10 +148,9 @@
                     let temp_html =  `<div class="col">
                                        <div class="row row-cols-3 row-cols-md-3 g-3">
                                             <div class="card w-100">
-                                                <img src="${image}" class="card-img-top" alt="..." style="max-width:100%; height: 400px;">
-
+                                                <img src="${image}" class="card-img-top" alt="...">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">${title}</h5>
+                                                    <h5 class="card-title">${location}</h5>
                                                     <p>${star_image}</p>
                                                     <p class="card-text"><small class="text-muted">${comment}</small></p>
                                                 </div>
@@ -236,7 +235,6 @@
             type: 'POST',
             url: '/foods',
             data: {username_give: username, url_give: url, star_give: star, comment_give: comment, image_give: image},
-            // formData,
             success: function (response) {
                 alert(response['msg'])
                 window.location.reload()
@@ -259,7 +257,6 @@
     myModal.addEventListener('shown.bs.modal', function () {
         myInput.focus()
     })
-
 </script>
 
 
@@ -278,9 +275,9 @@
     </div>
 
     <div class="input-group mb-3">
-        <span class="input-group-text">맛집 주소 URL</span>
+        <span class="input-group-text">URL</span>
         <input id="url" type="text" class="form-control" aria-label="Sizing example input"
-               aria-describedby="inputGroup-sizing-default" placeholder="맛집의 모바일 네이버 지도 url을 입력해주세요">
+               aria-describedby="inputGroup-sizing-default" placeholder="맛집의 네이버 지도 url을 입력해주세요">
     </div>
 
     <div class="input-group mb-3" style="padding: 15px 0px 0px 0px">
@@ -301,26 +298,33 @@
                aria-describedby="inputGroup-sizing-default" placeholder="맛, 분위기, 서비스 품질등을 알려주세요">
 
     </div>
+
     <div class="input-group mb-3">
             <span class="input-group-text">맛집 사진 URL</span>
             <input id="url-image" type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-default" placeholder="맛집 음식 사진을 공유해주세요">
     </div>
-<!--    <div class="input-group mb-3">-->
-<!--        <form action="http://localhost:5000/file_upload" method="post" enctype="mltipart/form-data">-->
-<!--            <input type="file" name='file' placeholder="맛집 사진을 공유해주세요">-->
-<!--            <label class="input-group-text" for="image">제출</label>-->
-<!--        </form>-->
-<!--    </div>-->
 
     <div class="mybtns">
         <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
         <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>
     </div>
 </div>
+<!--#cards-box-->
 
-<div class="mycards" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<div class="btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
     <div class="row row-cols-1 row-cols-md-3 g-3" id="card-box" type="button">
+         <div class="col">
+           <div class="row row-cols-3 row-cols-md-3 g-3">
+                <div class="card w-100">
+                    <img src="${image}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">${location}</h5>
+                        <p>${star_image}</p>
+                        <p class="card-text"><small class="text-muted">${comment}</small></p>
+                    </div>
+                </div>
+            </div>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
